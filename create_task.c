@@ -50,7 +50,7 @@ int main_proc ( int argc, char *argv[] )
 
 	tick_init();
 	uint64 tick1, tick2, diff;
-	double sum, sqSum;
+	double sum=0, sqSum=0;
 
 	for (i = 0; i < LOOP_SIZE; i++)
 	{

@@ -31,7 +31,9 @@ typedef long long unsigned uint64;
 #define tick_diff_loop(tick1, tick2, loop_size) (tick_diff((tick1),(tick2)) - (uint64)(LOOP_RATIO * (loop_size)))
 #define tick_time_loop(tick1, tick2, loop_size) (tick_diff_loop((tick1), (tick2), (loop_size)) / CPU_FREQUENCY)
 
-#define print_stat(sum, sqSum, n) printf("avg=%.2f, std=%.2e, avg_time=%.2ems\n", sum / n, sqrt(sqSum / n - (sum / n * sum / n)), sum / n / CPU_FREQUENCY) 
+#define print_stat(sum, sqSum, n) printf("avg=%.2f, std=%.2e, avg_time=%.2ems, std_time=%.2e\n", sum / n, sqrt(sqSum / n - (sum / n * sum / n)), sum / n / CPU_FREQUENCY, sqrt(sqSum / n - (sum / n * sum / n)) / CPU_FREQUENCY)
+
+#define print_stat_csv(sum, sqSum, n) printf("%.2f,%.2e,%.2e,%.2e\n", sum / n, sqrt(sqSum / n - (sum / n * sum / n)), sum / n / CPU_FREQUENCY, sqrt(sqSum / n - (sum / n * sum / n)) / CPU_FREQUENCY)
 
 inline uint64 tick_find_overhead()
 {
