@@ -15,8 +15,8 @@
 
 #define LOOP_SIZE_INNER 2000000
 #define LOOP_SIZE_OUTER 100
-#define DEFAULT_SIZE 256
-#define DEFAULT_STRIDE 96
+#define DEFAULT_SIZE (1<<30)
+#define DEFAULT_STRIDE 4096
 
 //size, stride in bytes; assuming: size % 8 == 0, stride % 8 == 0
 uint64* genPtrList(int size, int stride)
@@ -26,6 +26,9 @@ uint64* genPtrList(int size, int stride)
 	uint64* res = (uint64*)malloc(size);
 	memset(res, 0, size);
 	
+	//char c;
+	//scanf("%c", &c);
+
 	int pos = 0, nextPos = 0;
 	while(res[pos] == 0) //when res[pos] != 0, all possible positions are filled.
 	{
@@ -77,6 +80,8 @@ int main ( int argc, char *argv[] )
 		diff = tick_diff_loop(tick1, tick2, LOOP_SIZE_INNER);
 		sum += diff;
 		sqSum += diff * diff;
+
+		//printf("%d\n", i);
 	}
 
 	sum /= LOOP_SIZE_INNER;
@@ -84,6 +89,9 @@ int main ( int argc, char *argv[] )
 
 	printf("%d,%d,", size, stride);
 	print_stat_csv(sum, sqSum, LOOP_SIZE_OUTER);
+
+	//char c;
+	//scanf("%c", &c);
 
 	free(data);
 	return 0;
